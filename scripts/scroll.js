@@ -1,9 +1,11 @@
 const links = document.querySelectorAll('.header-menu__item a')
-console.log(links);
+const char = document.querySelector('.card-details__link-characteristics')
+const newArrey = [...links, char]
+
 
 seamless.polyfill();
 
-links.forEach((element) => {
+newArrey.forEach((element) => {
   element.addEventListener('click', (event) => {
     event.preventDefault()
 
@@ -11,7 +13,7 @@ links.forEach((element) => {
     const section = document.getElementById(id)
 
     if (section) {
-      seamless.elementScrollIntoView(section, {
+      seamless.elementScrollIntoView(section,  {
         behavior: "smooth",
         block: "start"
       })
