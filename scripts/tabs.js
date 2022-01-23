@@ -1,3 +1,4 @@
+const tabsFunc = () => {
 const tabs = document.querySelectorAll('.card-detail__change')
 const tabsTitle = document.querySelector('.card-details__title')
 const tabsPrice = document.querySelector('.card-details__price')
@@ -49,3 +50,6 @@ tabs.forEach((tab, index) => {
 })
 
 changeContent(0)
+}
+
+tabsFunc()

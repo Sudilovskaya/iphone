@@ -1,4 +1,5 @@
-const links = document.querySelectorAll('.header-menu__item a')
+const scrollFunc = () => {
+  const links = document.querySelectorAll('.header-menu__item a')
 const char = document.querySelector('.card-details__link-characteristics')
 const newArrey = [...links, char]
 
@@ -26,3 +27,6 @@ newArrey.forEach((element) => {
     }
   })
 })
+}
+ 
+scrollFunc()
