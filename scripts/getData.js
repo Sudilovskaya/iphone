@@ -1,8 +1,14 @@
 const getData = () => {
   const list = document.querySelector('.cross-sell__list')
+  const btn = document.querySelector('.cross-sell__add')
+
   
-  const render = (data) => {
-    console.log(item);
+
+  let stack = 4
+  let count = 1
+  
+  const render = (data) => {  // логика рендера
+    
     list.innerHTML = ''
 
     data.forEach(item => {
@@ -19,7 +25,24 @@ const getData = () => {
     })
   }
   
-  fetch('https://iphone-project-48194-default-rtdb.firebaseio.com/db.json')
+  const sliceArray = (data, index) => { //логика отрезания от даты опр. частей
+    return data.slice(0, index)  // index - newStack
+  }
+
+  const changeData = (data) => {  //логика изменения даты. принимает массив полученный методом fetch
+    const newStack = stack * count  
+
+    render(sliceArray(data, newStack)) //передаем рез-т выполнения функции sliceArray
+
+    if (data.length > newStack) {
+      count++
+    } else {
+      btn.style.display = 'none'
+    }
+  }
+
+  const getGoods = () => {
+      fetch('https://iphone-project-48194-default-rtdb.firebaseio.com/db.json')
     .then((response) => {
        if (response.ok){
           return response.json()
@@ -28,11 +51,14 @@ const getData = () => {
         }
         }) //обработает и приведет в нужный вид
         .then ((data) => {  //дождется обработки первого метода, принимает уже обработанные данные
-          console.log(data);
+          changeData(data);
         })
         .catch ((error) => {
           console.error(error.message);
         })
-        
+  }
+
+        btn.addEventListener('click', getGoods )
+        getGoods()
   }
  getData ()
